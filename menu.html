@@ -294,9 +294,18 @@
         }
         .menu-card .card-title {
           font-size: 1.5rem;
+          overflow-wrap: anywhere;
         }
         .menu-card .price {
           font-size: 1.3rem;
+          margin-left: 0;
+          white-space: normal;
+          line-height: 1.35;
+          overflow-wrap: anywhere;
+        }
+        .menu-card .title-wrapper {
+          align-items: flex-start;
+          gap: 4px;
         }
       }
 
@@ -358,9 +367,17 @@
             height="70"
             alt="Elephant Walk - Home"
             onerror="
-              this.onerror = null;
-              this.src = 'assets/images/Elephant_Walk_Logo.png';
+              if (this.dataset.fallback === '1') {
+                this.dataset.fallback = '2';
+                this.src = 'assets/images/Elephant_Walk_Logo.png';
+              } else if (this.dataset.fallback === '2') {
+                this.dataset.fallback = '3';
+                this.src = '/assets/images/Elephant_Walk_Logo.png';
+              } else {
+                this.onerror = null;
+              }
             "
+            data-fallback="1"
           />
         </a>
         <nav class="navbar" data-navbar>
@@ -369,14 +386,22 @@
           </button>
           <a href="./index.html" class="logo drawer-logo">
             <img
-              src="assets/images/Elephant_Walk_Logo.png"
+              src="./assets/images/Elephant_Walk_Logo.png"
               width="150"
               height="48"
               alt="Elephant Walk - Home"
               onerror="
-                this.onerror = null;
-                this.src = './assets/images/Elephant_Walk_Logo.png';
+                if (this.dataset.fallback === '1') {
+                  this.dataset.fallback = '2';
+                  this.src = 'assets/images/Elephant_Walk_Logo.png';
+                } else if (this.dataset.fallback === '2') {
+                  this.dataset.fallback = '3';
+                  this.src = '/assets/images/Elephant_Walk_Logo.png';
+                } else {
+                  this.onerror = null;
+                }
               "
+              data-fallback="1"
             />
           </a>
           <ul class="navbar-list">
