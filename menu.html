@@ -3065,18 +3065,51 @@
           bindSectionObserver();
         }
 
+        function scrollToPanelStart() {
+          var activeNav =
+            activePanel === "food"
+              ? navFood
+              : activePanel === "bar"
+                ? navBar
+                : activePanel === "drinks"
+                  ? navDrinks
+                  : activePanel === "ethiopian"
+                    ? navEthiopian
+                    : navDesserts;
+
+          var activePanelEl =
+            activePanel === "food"
+              ? panelFood
+              : activePanel === "bar"
+                ? panelBar
+                : activePanel === "drinks"
+                  ? panelDrinks
+                  : activePanel === "ethiopian"
+                    ? panelEthiopian
+                    : panelDesserts;
+
+          var firstSection = activePanelEl.querySelector(".menu-section");
+          if (!firstSection) return;
+
+          var headerH = header ? header.getBoundingClientRect().height : 0;
+          var tabsH = tabsEl.getBoundingClientRect().height;
+          var navH = activeNav.getBoundingClientRect().height;
+          var totalH = headerH + tabsH + navH;
+
+          window.scrollTo({
+            top:
+              firstSection.getBoundingClientRect().top +
+              window.pageYOffset -
+              totalH,
+            behavior: "smooth",
+          });
+        }
+
         tabBtns.forEach(function (btn) {
           btn.addEventListener("click", function () {
             if (btn.dataset.tab === activePanel) return;
             activateTab(btn.dataset.tab);
-            var headerH = header ? header.getBoundingClientRect().height : 0;
-            window.scrollTo({
-              top:
-                tabsEl.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerH,
-              behavior: "smooth",
-            });
+            scrollToPanelStart();
           });
         });
 
