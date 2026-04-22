@@ -137,7 +137,7 @@
       }
 
       /* Mobile drawer logo sizing */
-      .navbar .logo img {
+      .navbar .logo.drawer-logo img {
         width: 150px;
         height: auto;
         object-fit: contain;
@@ -261,8 +261,24 @@
         .menu-section-title {
           font-size: 2.8rem;
         }
+        .menu-cat-nav {
+          overflow-x: hidden;
+        }
         .menu-cat-nav ul {
-          justify-content: flex-start;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          min-width: 100%;
+          width: 100%;
+          justify-content: stretch;
+          padding: 0 8px;
+        }
+        .menu-cat-nav ul li a {
+          text-align: center;
+          white-space: normal;
+          line-height: 1.3;
+          font-size: 1rem;
+          letter-spacing: 0.6px;
+          padding: 10px 8px;
         }
         .menu-tab-btn {
           padding: 9px 22px;
@@ -282,6 +298,16 @@
         }
         .menu-card .price {
           font-size: 1.3rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .menu-cat-nav ul {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .navbar .logo.drawer-logo img {
+          width: 128px;
         }
       }
     </style>
@@ -340,15 +366,15 @@
           <button class="close-btn" aria-label="close menu" data-nav-toggler>
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
           </button>
-          <a href="./index.html" class="logo">
+          <a href="./index.html" class="logo drawer-logo">
             <img
-              src="./assets/images/Elephant_Walk_Logo.png"
+              src="assets/images/Elephant_Walk_Logo.png"
               width="150"
               height="48"
               alt="Elephant Walk - Home"
               onerror="
                 this.onerror = null;
-                this.src = 'assets/images/Elephant_Walk_Logo.png';
+                this.src = './assets/images/Elephant_Walk_Logo.png';
               "
             />
           </a>
