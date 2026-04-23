@@ -140,22 +140,7 @@
       .navbar .logo.drawer-logo img {
         width: 150px;
         height: auto;
-        display: block;
         object-fit: contain;
-      }
-      .navbar .logo.drawer-logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 56px;
-      }
-      .navbar .logo.drawer-logo .drawer-logo-fallback {
-        display: none;
-        color: #ffffff;
-        font-family: "Forum", serif;
-        font-size: 2.8rem;
-        letter-spacing: 0.5px;
-        line-height: 1.1;
       }
 
       /* Hide fixed menu bars while hamburger drawer is open */
@@ -377,7 +362,6 @@
       <div class="container">
         <a href="./index.html" class="logo">
           <img
-            id="header-logo-img"
             src="./assets/images/Elephant_Walk_Logo.png"
             width="220"
             height="70"
@@ -402,20 +386,23 @@
           </button>
           <a href="./index.html" class="logo drawer-logo">
             <img
-              id="drawer-logo-img"
               src="./assets/images/Elephant_Walk_Logo.png"
               width="150"
               height="48"
               alt="Elephant Walk - Home"
               onerror="
-                this.style.display = 'none';
-                var fb = document.getElementById('drawer-logo-fallback');
-                if (fb) fb.style.display = 'inline-block';
+                if (this.dataset.fallback === '1') {
+                  this.dataset.fallback = '2';
+                  this.src = 'assets/images/Elephant_Walk_Logo.png';
+                } else if (this.dataset.fallback === '2') {
+                  this.dataset.fallback = '3';
+                  this.src = '/assets/images/Elephant_Walk_Logo.png';
+                } else {
+                  this.onerror = null;
+                }
               "
+              data-fallback="1"
             />
-            <span id="drawer-logo-fallback" class="drawer-logo-fallback"
-              >Elephant Walk</span
-            >
           </a>
           <ul class="navbar-list">
             <li class="navbar-item">
@@ -3091,24 +3078,9 @@
         var tabsEl = document.getElementById("menu-tabs-anchor");
         var mainEl = document.querySelector(".menu-page-content");
         var header = document.querySelector(".header");
-        var headerLogoImg = document.getElementById("header-logo-img");
-        var drawerLogoImg = document.getElementById("drawer-logo-img");
-        var drawerLogoFallback = document.getElementById(
-          "drawer-logo-fallback",
-        );
 
         var activePanel = "food";
         var sectionObserver = null;
-
-        function syncDrawerLogoFromHeader() {
-          if (!drawerLogoImg || !headerLogoImg) return;
-
-          var resolvedSrc = headerLogoImg.currentSrc || headerLogoImg.src;
-          if (resolvedSrc) drawerLogoImg.src = resolvedSrc;
-
-          drawerLogoImg.style.display = "block";
-          if (drawerLogoFallback) drawerLogoFallback.style.display = "none";
-        }
 
         /* ── 3. CORE: position bars + push content ────────────── */
         function positionBars() {
@@ -3168,25 +3140,15 @@
         window.addEventListener("scroll", positionBars, { passive: true });
         window.addEventListener("resize", positionBars);
         window.addEventListener("load", function () {
-          syncDrawerLogoFromHeader();
           positionBars();
           setTimeout(positionBars, 200);
           setTimeout(positionBars, 600);
         });
         document.addEventListener("DOMContentLoaded", function () {
-          syncDrawerLogoFromHeader();
           positionBars();
           setTimeout(positionBars, 100);
           setTimeout(positionBars, 400);
           setTimeout(positionBars, 800);
-
-          document
-            .querySelectorAll("[data-nav-toggler]")
-            .forEach(function (el) {
-              el.addEventListener("click", function () {
-                setTimeout(syncDrawerLogoFromHeader, 0);
-              });
-            });
         });
 
         /* ── 5. TAB SWITCHING ─────────────────────────────────── */
