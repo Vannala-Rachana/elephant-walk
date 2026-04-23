@@ -140,7 +140,22 @@
       .navbar .logo.drawer-logo img {
         width: 150px;
         height: auto;
+        display: block;
         object-fit: contain;
+      }
+      .navbar .logo.drawer-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+      }
+      .navbar .logo.drawer-logo .drawer-logo-fallback {
+        display: none;
+        color: #ffffff;
+        font-family: "Forum", serif;
+        font-size: 2.8rem;
+        letter-spacing: 0.5px;
+        line-height: 1.1;
       }
 
       /* Hide fixed menu bars while hamburger drawer is open */
@@ -362,6 +377,7 @@
       <div class="container">
         <a href="./index.html" class="logo">
           <img
+            id="header-logo-img"
             src="./assets/images/Elephant_Walk_Logo.png"
             width="220"
             height="70"
@@ -386,23 +402,20 @@
           </button>
           <a href="./index.html" class="logo drawer-logo">
             <img
+              id="drawer-logo-img"
               src="./assets/images/Elephant_Walk_Logo.png"
               width="150"
               height="48"
               alt="Elephant Walk - Home"
               onerror="
-                if (this.dataset.fallback === '1') {
-                  this.dataset.fallback = '2';
-                  this.src = 'assets/images/Elephant_Walk_Logo.png';
-                } else if (this.dataset.fallback === '2') {
-                  this.dataset.fallback = '3';
-                  this.src = '/assets/images/Elephant_Walk_Logo.png';
-                } else {
-                  this.onerror = null;
-                }
+                this.style.display = 'none';
+                var fb = document.getElementById('drawer-logo-fallback');
+                if (fb) fb.style.display = 'inline-block';
               "
-              data-fallback="1"
             />
+            <span id="drawer-logo-fallback" class="drawer-logo-fallback"
+              >Elephant Walk</span
+            >
           </a>
           <ul class="navbar-list">
             <li class="navbar-item">
@@ -474,6 +487,9 @@
       <button class="menu-tab-btn" data-tab="ethiopian">
         🇮🇪 Ethiopian Food
       </button>
+      <button class="menu-tab-btn" data-tab="brunch">
+        🧇 Brunch Specialities
+      </button>
       <button class="menu-tab-btn" data-tab="bar">🍹 Bar Menu</button>
       <button class="menu-tab-btn" data-tab="drinks">☕ Drinks</button>
       <button class="menu-tab-btn" data-tab="desserts">🍰 Desserts</button>
@@ -488,13 +504,26 @@
       <ul>
         <li><a href="#appetizers" class="active">Appetizers</a></li>
         <li><a href="#salads">Salads</a></li>
+        <li><a href="#house-made-soups">House Made Soups</a></li>
         <li><a href="#masalas-curries">Masalas &amp; Curries</a></li>
         <li><a href="#tandoori">Tandoori</a></li>
 
         <li><a href="#biryani">Biryani</a></li>
         <li><a href="#modern-indian">Modern Indian</a></li>
+      </ul>
+    </nav>
 
-        <li><a href="#brunch">Brunch</a></li>
+    <!-- FIXED CATEGORY NAV — BRUNCH -->
+    <nav
+      class="menu-cat-nav"
+      id="cat-nav-brunch"
+      aria-label="brunch menu categories"
+    >
+      <ul>
+        <li><a href="#br-main-event" class="active">The Main Event</a></li>
+        <li><a href="#br-sweet-stuff">The Sweet Stuff</a></li>
+        <li><a href="#br-traditional-classics">Traditional Classics</a></li>
+        <li><a href="#br-international-classics">International Classics</a></li>
       </ul>
     </nav>
 
@@ -532,8 +561,11 @@
       aria-label="ethiopian menu categories"
     >
       <ul>
-        <li><a href="#specialities" class="active">Ethiopian Flavours</a></li>
-        <li><a href="#tibs-sizzlers">Tibs / Sizzlers</a></li>
+        <li><a href="#et-tibs-sizzlers">Tibs / Sizzlers</a></li>
+        <li><a href="#et-specialties">House Specialties</a></li>
+        <li><a href="#et-stews">Chicken / Lamb Stews</a></li>
+        <li><a href="#et-seafood">Seafood</a></li>
+        <li><a href="#et-combo">Ethiopian Combo</a></li>
       </ul>
     </nav>
     <!--DESSERTS-->
@@ -644,20 +676,6 @@
                   </p>
                 </div>
               </div>
-
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Mushroom Tibs</h3>
-                    <span class="price">$6</span>
-                  </div>
-                  <p class="card-desc">
-                    Portabella mushrooms marinated and sautéed with onions,
-                    garlic, fresh tomatoes and bell pepper.
-                  </p>
-                </div>
-              </div>
             </div>
           </section>
 
@@ -714,6 +732,49 @@
                   <p class="card-desc">
                     Diced beet root and potatoes with fresh garlic, lemon and
                     olive oil dressing.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="house-made-soups">
+            <h2 class="menu-section-title">House Made Soups</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mulligatawny Soup</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Lentil soup with chicken, herbs and warm spices.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lentil / Dal Soup</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Mild red lentil soup seasoned Ethiopian style.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken Soup</h3>
+                    <span class="price">$8</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh homemade chicken soup with herbs and carrots.
                   </p>
                 </div>
               </div>
@@ -1181,9 +1242,13 @@
               </div>
             </div>
           </section>
+        </div>
+        <!-- END FOOD PANEL -->
 
-          <section class="menu-section" id="brunch">
-            <h2 class="menu-section-title">Brunch Specialties</h2>
+        <!-- ══════════════ BRUNCH PANEL ══════════════ -->
+        <div id="panel-brunch" class="menu-panel" style="display: none" hidden>
+          <section class="menu-section" id="br-main-event">
+            <h2 class="menu-section-title">The Main Event</h2>
             <hr class="menu-section-divider" />
             <div class="menu-grid">
               <div class="menu-card">
@@ -1194,9 +1259,8 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Eggs poached in a sauce of tomatoes, olive oil, peppers,
-                    onion and garlic, sprinkled with paprika and cayenne
-                    peppers.
+                    Eggs poached in tomato sauce with peppers, onion, garlic and
+                    cumin.
                   </p>
                 </div>
               </div>
@@ -1208,8 +1272,8 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Red potatoes, mixed vegetables, caramelized sweet onions and
-                    sautéed peppers covered in spicy hollandaise.
+                    Red potatoes, vegetables and caramelized onions with spicy
+                    hollandaise.
                   </p>
                 </div>
               </div>
@@ -1221,8 +1285,7 @@
                     <span class="price">$14</span>
                   </div>
                   <p class="card-desc">
-                    Toasted bagel, herbed crème cheese, smoked salmon, sunny
-                    side up egg, red onion and capers.
+                    Toasted bagel, herbed cream cheese, smoked salmon and egg.
                   </p>
                 </div>
               </div>
@@ -1234,8 +1297,8 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Handbreaded all-natural chicken tenderloin served with
-                    traditional waffle and Ohio maple syrup.
+                    Handbreaded chicken with traditional waffle and Ohio maple
+                    syrup.
                   </p>
                 </div>
               </div>
@@ -1247,8 +1310,8 @@
                     <span class="price">$10</span>
                   </div>
                   <p class="card-desc">
-                    Crispy waffle topped with strawberries and blueberries,
-                    dusted with powdered sugar and Ohio maple syrup.
+                    Waffle topped with strawberries and blueberries, powdered
+                    sugar and syrup.
                   </p>
                 </div>
               </div>
@@ -1260,8 +1323,8 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Iconic street dish from Calcutta — finely sliced veggies,
-                    eggs, sprinkle of masala wrapped in fresh Indian bread.
+                    Street-style rolled eggs and veggies with masala and aioli
+                    in Indian bread.
                   </p>
                 </div>
               </div>
@@ -1273,8 +1336,8 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Onions, chili, coriander, pepper and scrambled eggs between
-                    2 pieces of bread.
+                    Onion, coriander, pepper and scrambled eggs between two
+                    slices.
                   </p>
                 </div>
               </div>
@@ -1286,8 +1349,7 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Ribeye steak with eggs and spicy hollandaise on artisan
-                    ciabatta bread.
+                    Ribeye with eggs and spicy hollandaise on artisan bread.
                   </p>
                 </div>
               </div>
@@ -1299,11 +1361,18 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Herbed crème cheese, goat cheese, tomatoes, mushrooms and
-                    arugula-filled omelette topped with cilantro.
+                    Herbed cheese, mushrooms, tomato and arugula omelette topped
+                    with cilantro.
                   </p>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-sweet-stuff">
+            <h2 class="menu-section-title">The Sweet Stuff</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
               <div class="menu-card">
                 <div class="menu-thumb-placeholder"></div>
                 <div class="menu-card-content">
@@ -1312,13 +1381,11 @@
                     <span class="price">$10</span>
                   </div>
                   <p class="card-desc">
-                    Soft leavened Indian bread, lightly fried, topped with
-                    bananas or strawberries, powdered sugar and Ohio maple
-                    butter syrup.
+                    Lightly fried Indian bread topped with bananas or
+                    strawberries and maple syrup.
                   </p>
                 </div>
               </div>
-
               <div class="menu-card">
                 <div class="menu-thumb-placeholder">
                   <img
@@ -1332,8 +1399,8 @@
                     <span class="price">$10</span>
                   </div>
                   <p class="card-desc">
-                    Thick slice of French bread grilled golden brown, topped
-                    with powdered sugar and Ohio maple butter syrup.
+                    Thick-cut French toast with banana or strawberries and maple
+                    butter syrup.
                   </p>
                 </div>
               </div>
@@ -1345,16 +1412,94 @@
                     <span class="price">$12</span>
                   </div>
                   <p class="card-desc">
-                    Two scratchmade pancakes with strawberries and blueberries,
-                    dusted with powdered sugar and drizzled with Ohio maple
-                    syrup.
+                    Two scratchmade pancakes with berries, powdered sugar and
+                    maple syrup.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-traditional-classics">
+            <h2 class="menu-section-title">Traditional Classics</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Aloo Pratha</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Flatbread stuffed with potatoes, served with housemade
+                    yogurt.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Pav Bhaji</h3>
+                    <span class="price">$12</span>
+                  </div>
+                  <p class="card-desc">
+                    Buttery mashed mixed vegetables with masala, served with
+                    soft buns.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Idli</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Fluffy steamed cakes with yogurt, semolina and herbs, served
+                    with chutney.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="br-international-classics">
+            <h2 class="menu-section-title">International Classics</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Dosa Waffle</h3>
+                    <span class="price">$10</span>
+                  </div>
+                  <p class="card-desc">
+                    Indian-style savory waffle from fermented rice and lentils;
+                    served with fruit and maple syrup. Veg / Veg GF.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Savory Dosa Crepes</h3>
+                    <span class="price">$10 | add scrambled eggs side +$2</span>
+                  </div>
+                  <p class="card-desc">
+                    Thin crispy crepes filled with potatoes and vegetables. Veg
+                    / Veg GF.
                   </p>
                 </div>
               </div>
             </div>
           </section>
         </div>
-        <!-- END FOOD PANEL -->
+        <!-- END BRUNCH PANEL -->
 
         <!-- ══════════════ BAR PANEL ══════════════ -->
         <div id="panel-bar" class="menu-panel" style="display: none" hidden>
@@ -2229,6 +2374,18 @@
                   </p>
                 </div>
               </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Mango Lassi</h3>
+                    <span class="price">$6</span>
+                  </div>
+                  <p class="card-desc">
+                    Chilled yogurt-based mango smoothie drink.
+                  </p>
+                </div>
+              </div>
 
               <div class="menu-card">
                 <div class="menu-thumb-placeholder">
@@ -2439,6 +2596,18 @@
                   </p>
                 </div>
               </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Shaee</h3>
+                    <span class="price">$5</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional black tea simmered with cloves and spices.
+                  </p>
+                </div>
+              </div>
 
               <div class="menu-card">
                 <div class="menu-thumb-placeholder">
@@ -2516,133 +2685,7 @@
           style="display: none"
           hidden
         >
-          <section class="menu-section" id="specialities">
-            <h2 class="menu-section-title">Ethiopian Specialties</h2>
-            <hr class="menu-section-divider" />
-            <div class="menu-grid">
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Kitfo</h3>
-                    <span class="price">$16</span>
-                  </div>
-                  <p class="card-desc">
-                    Grassfed prime filet mignon tartare, finely chopped with
-                    Ethiopian cheese curd, butter, cardamom and mitmita. Served
-                    rare, medium or raw.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Collard Green Kitfo</h3>
-                    <span class="price">$17</span>
-                  </div>
-                  <p class="card-desc">
-                    Kitfo with collard greens, served rare, medium or raw.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Chicken Stew / Doro Wot</h3>
-                    <span class="price">$14</span>
-                  </div>
-                  <p class="card-desc">
-                    The national dish of Ethiopia — meticulously prepared
-                    chicken simmered for hours with berbere sauce. Served with
-                    drum stick, hard boiled egg and injera.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">
-                      Lamb + Collard Greens (Gomen Be Siga)
-                    </h3>
-                    <span class="price">$15</span>
-                  </div>
-                  <p class="card-desc">
-                    Cubed boneless prime lamb mixed with fresh collard greens
-                    simmered in a mild sauce.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Fish / Asa Tibs</h3>
-                    <span class="price">$14</span>
-                  </div>
-                  <p class="card-desc">
-                    Ethiopian style bone-in fish served with potatoes, rice,
-                    beet root and fresh lime with injera.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Cod Tibs</h3>
-                    <span class="price">$15</span>
-                  </div>
-                  <p class="card-desc">
-                    Cod with sautéed onion, fresh garlic, tomatoes and special
-                    sauce served with injera.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">String Beans / Fasolia</h3>
-                    <span class="price">$11</span>
-                  </div>
-                  <p class="card-desc">
-                    Fresh green beans and carrots simmered in a flavorful mild
-                    sauce.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Eggplant &amp; Carrot Wot</h3>
-                    <span class="price">$11</span>
-                  </div>
-                  <p class="card-desc">
-                    Eggplant and bits of carrots simmered in stewed tomato
-                    sauce.
-                  </p>
-                </div>
-              </div>
-              <div class="menu-card">
-                <div class="menu-thumb-placeholder"></div>
-                <div class="menu-card-content">
-                  <div class="title-wrapper">
-                    <h3 class="card-title">Vegetarian Combo</h3>
-                    <span class="price">1 person $15 | 2 persons $30</span>
-                  </div>
-                  <p class="card-desc">
-                    Red lentils, misir, yellow peas, collard greens and cabbage
-                    — served with injera.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section class="menu-section" id="tibs-sizzlers">
+          <section class="menu-section" id="et-tibs-sizzlers">
             <h2 class="menu-section-title">Tibs / Sizzlers</h2>
             <hr class="menu-section-divider" />
             <div class="menu-grid">
@@ -2650,13 +2693,12 @@
                 <div class="menu-thumb-placeholder"></div>
                 <div class="menu-card-content">
                   <div class="title-wrapper">
-                    <h3 class="card-title">Ribeye Beef Steak</h3>
-                    <span class="price">$14</span>
+                    <h3 class="card-title">Mushroom Tibs</h3>
+                    <span class="price">$6</span>
                   </div>
                   <p class="card-desc">
-                    Pan seared ribeye with red onion, tomatoes, bell peppers,
-                    herbs and spices — served with basmati rice, choice of bread
-                    or naan.
+                    Portabella mushrooms sauteed with onions, garlic, tomatoes,
+                    bell pepper and Ethiopian seasoning.
                   </p>
                 </div>
               </div>
@@ -2664,17 +2706,16 @@
                 <div class="menu-thumb-placeholder"></div>
                 <div class="menu-card-content">
                   <div class="title-wrapper">
-                    <h3 class="card-title">Chicken / Lamb / Veggie Tibs</h3>
-                    <span class="price"
-                      >Chicken $14 | Lamb $15 | Veggie $12</span
-                    >
+                    <h3 class="card-title">Ribeye Beef Steak</h3>
+                    <span class="price">$15</span>
                   </div>
                   <p class="card-desc">
-                    Cubed protein sautéed with bell peppers, onions and tomatoes
-                    to sizzler perfection.
+                    Tender ribeye sauteed with onion, tomato, jalapeno and
+                    Ethiopian spices.
                   </p>
                 </div>
               </div>
+
               <div class="menu-card">
                 <div class="menu-thumb-placeholder"></div>
                 <div class="menu-card-content">
@@ -2683,8 +2724,8 @@
                     <span class="price">$15</span>
                   </div>
                   <p class="card-desc">
-                    Mildly seasoned pan seared bone-in lamb with a touch of
-                    rosemary.
+                    Mildly seasoned tibs with fresh rosemary and sauteed
+                    vegetables.
                   </p>
                 </div>
               </div>
@@ -2696,8 +2737,172 @@
                     <span class="price">$15</span>
                   </div>
                   <p class="card-desc">
-                    Seasoned with berbere sauce made with chili peppers. Choose
-                    spice level 1–6.
+                    Sauteed tibs in house awaze sauce made with chili peppers.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken / Lamb</h3>
+                    <span class="price">Chicken $15 | Lamb $15 </span>
+                  </div>
+                  <p class="card-desc">
+                    Choose your protein sauteed with onions, tomatoes, peppers
+                    and Ethiopian herbs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-specialties">
+            <h2 class="menu-section-title">House Specialties</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Kitfo</h3>
+                    <span class="price">$16</span>
+                  </div>
+                  <p class="card-desc">
+                    Grassfed prime filet mignon tartare, finely chopped with
+                    Ethiopian spiced butter and mitmita. Served rare, medium or
+                    raw.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Collard Green Kitfo</h3>
+                    <span class="price">$17</span>
+                  </div>
+                  <p class="card-desc">
+                    Traditional kitfo topped with seasoned collard greens.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-stews">
+            <h2 class="menu-section-title">Chicken / Lamb Stews</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Chicken Stew / Doro Wot</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Ethiopian national dish simmered slowly in berbere sauce,
+                    served with egg and injera.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Awaze Wings</h3>
+                    <span class="price">6 pc $8.99 </span>
+                  </div>
+                  <p class="card-desc">
+                    Fried wings tossed in house awaze sauce and celery sticks.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Lamb + Collard Greens</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Cubed lamb mixed with fresh collard greens in a mild sauce.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-seafood">
+            <h2 class="menu-section-title">Seafood</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Fish / Asa Tibs</h3>
+                    <span class="price">$14</span>
+                  </div>
+                  <p class="card-desc">
+                    Ethiopian-style fish served with potatoes and fresh lime.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Cod Tibs</h3>
+                    <span class="price">$15</span>
+                  </div>
+                  <p class="card-desc">
+                    Cod sauteed with onion, garlic, tomato and Ethiopian spices.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="menu-section" id="et-combo">
+            <h2 class="menu-section-title">Ethiopian Combo</h2>
+            <hr class="menu-section-divider" />
+            <div class="menu-grid">
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Vegetarian Combo</h3>
+                    <span class="price">1 person $15 | 2 persons $30</span>
+                  </div>
+                  <p class="card-desc">
+                    Red lentils, yellow peas, collard greens and cabbage served
+                    with injera.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">String Beans / Fasolia</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Fresh green beans and carrots in mild sauce.
+                  </p>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-thumb-placeholder"></div>
+                <div class="menu-card-content">
+                  <div class="title-wrapper">
+                    <h3 class="card-title">Eggplant &amp; Carrot Wot</h3>
+                    <span class="price">$11</span>
+                  </div>
+                  <p class="card-desc">
+                    Eggplant and carrot simmered in tomato stew.
                   </p>
                 </div>
               </div>
@@ -2872,8 +3077,10 @@
         /* ── 2. ELEMENTS ──────────────────────────────────────── */
         var tabBtns = document.querySelectorAll(".menu-tab-btn");
         var panelFood = document.getElementById("panel-food");
+        var panelBrunch = document.getElementById("panel-brunch");
         var panelBar = document.getElementById("panel-bar");
         var navFood = document.getElementById("cat-nav-food");
+        var navBrunch = document.getElementById("cat-nav-brunch");
         var navBar = document.getElementById("cat-nav-bar");
         var panelDrinks = document.getElementById("panel-drinks");
         var panelEthiopian = document.getElementById("panel-ethiopian");
@@ -2884,9 +3091,24 @@
         var tabsEl = document.getElementById("menu-tabs-anchor");
         var mainEl = document.querySelector(".menu-page-content");
         var header = document.querySelector(".header");
+        var headerLogoImg = document.getElementById("header-logo-img");
+        var drawerLogoImg = document.getElementById("drawer-logo-img");
+        var drawerLogoFallback = document.getElementById(
+          "drawer-logo-fallback",
+        );
 
         var activePanel = "food";
         var sectionObserver = null;
+
+        function syncDrawerLogoFromHeader() {
+          if (!drawerLogoImg || !headerLogoImg) return;
+
+          var resolvedSrc = headerLogoImg.currentSrc || headerLogoImg.src;
+          if (resolvedSrc) drawerLogoImg.src = resolvedSrc;
+
+          drawerLogoImg.style.display = "block";
+          if (drawerLogoFallback) drawerLogoFallback.style.display = "none";
+        }
 
         /* ── 3. CORE: position bars + push content ────────────── */
         function positionBars() {
@@ -2898,6 +3120,7 @@
 
           var navTop = headerH + tabsH;
           navFood.style.top = navTop + "px";
+          navBrunch.style.top = navTop + "px";
           navBar.style.top = navTop + "px";
           navDrinks.style.top = navTop + "px";
           navEthiopian.style.top = navTop + "px";
@@ -2906,13 +3129,15 @@
           var activeNav =
             activePanel === "food"
               ? navFood
-              : activePanel === "bar"
-                ? navBar
-                : activePanel === "drinks"
-                  ? navDrinks
-                  : activePanel === "ethiopian"
-                    ? navEthiopian
-                    : navDesserts;
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
           var navH = activeNav.getBoundingClientRect().height;
 
           var totalH = headerH + tabsH + navH;
@@ -2943,15 +3168,25 @@
         window.addEventListener("scroll", positionBars, { passive: true });
         window.addEventListener("resize", positionBars);
         window.addEventListener("load", function () {
+          syncDrawerLogoFromHeader();
           positionBars();
           setTimeout(positionBars, 200);
           setTimeout(positionBars, 600);
         });
         document.addEventListener("DOMContentLoaded", function () {
+          syncDrawerLogoFromHeader();
           positionBars();
           setTimeout(positionBars, 100);
           setTimeout(positionBars, 400);
           setTimeout(positionBars, 800);
+
+          document
+            .querySelectorAll("[data-nav-toggler]")
+            .forEach(function (el) {
+              el.addEventListener("click", function () {
+                setTimeout(syncDrawerLogoFromHeader, 0);
+              });
+            });
         });
 
         /* ── 5. TAB SWITCHING ─────────────────────────────────── */
@@ -2963,18 +3198,21 @@
           });
 
           var showFood = tab === "food";
+          var showBrunch = tab === "brunch";
           var showBar = tab === "bar";
           var showDrinks = tab === "drinks";
           var showEthiopian = tab === "ethiopian";
           var showDesserts = tab === "desserts";
 
           panelFood.classList.toggle("is-active", showFood);
+          panelBrunch.classList.toggle("is-active", showBrunch);
           panelBar.classList.toggle("is-active", showBar);
           panelDrinks.classList.toggle("is-active", showDrinks);
           panelEthiopian.classList.toggle("is-active", showEthiopian);
           panelDesserts.classList.toggle("is-active", showDesserts);
 
           panelFood.hidden = !showFood;
+          panelBrunch.hidden = !showBrunch;
           panelBar.hidden = !showBar;
           panelDrinks.hidden = !showDrinks;
           panelEthiopian.hidden = !showEthiopian;
@@ -2983,6 +3221,11 @@
           panelFood.style.setProperty(
             "display",
             showFood ? "block" : "none",
+            "important",
+          );
+          panelBrunch.style.setProperty(
+            "display",
+            showBrunch ? "block" : "none",
             "important",
           );
           panelBar.style.setProperty(
@@ -3008,6 +3251,7 @@
 
           [
             panelFood,
+            panelBrunch,
             panelBar,
             panelDrinks,
             panelEthiopian,
@@ -3015,6 +3259,7 @@
           ].forEach(function (panel) {
             var isActivePanel =
               (panel === panelFood && showFood) ||
+              (panel === panelBrunch && showBrunch) ||
               (panel === panelBar && showBar) ||
               (panel === panelDrinks && showDrinks) ||
               (panel === panelEthiopian && showEthiopian) ||
@@ -3029,18 +3274,8 @@
             });
           });
 
-          // Defensive fallback: keep these food-only sections visible only on Food tab.
-          ["brunch"].forEach(function (id) {
-            var section = document.getElementById(id);
-            if (!section) return;
-            section.style.setProperty(
-              "display",
-              showFood ? "block" : "none",
-              "important",
-            );
-          });
-
           navFood.classList.toggle("is-active", showFood);
+          navBrunch.classList.toggle("is-active", showBrunch);
           navBar.classList.toggle("is-active", showBar);
           navDrinks.classList.toggle("is-active", showDrinks);
           navEthiopian.classList.toggle("is-active", showEthiopian);
@@ -3048,13 +3283,15 @@
 
           var nav = showFood
             ? navFood
-            : showBar
-              ? navBar
-              : showDrinks
-                ? navDrinks
-                : showEthiopian
-                  ? navEthiopian
-                  : navDesserts;
+            : showBrunch
+              ? navBrunch
+              : showBar
+                ? navBar
+                : showDrinks
+                  ? navDrinks
+                  : showEthiopian
+                    ? navEthiopian
+                    : navDesserts;
           nav.querySelectorAll("a").forEach(function (l) {
             l.classList.remove("active");
           });
@@ -3069,24 +3306,28 @@
           var activeNav =
             activePanel === "food"
               ? navFood
-              : activePanel === "bar"
-                ? navBar
-                : activePanel === "drinks"
-                  ? navDrinks
-                  : activePanel === "ethiopian"
-                    ? navEthiopian
-                    : navDesserts;
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
 
           var activePanelEl =
             activePanel === "food"
               ? panelFood
-              : activePanel === "bar"
-                ? panelBar
-                : activePanel === "drinks"
-                  ? panelDrinks
-                  : activePanel === "ethiopian"
-                    ? panelEthiopian
-                    : panelDesserts;
+              : activePanel === "brunch"
+                ? panelBrunch
+                : activePanel === "bar"
+                  ? panelBar
+                  : activePanel === "drinks"
+                    ? panelDrinks
+                    : activePanel === "ethiopian"
+                      ? panelEthiopian
+                      : panelDesserts;
 
           var firstSection = activePanelEl.querySelector(".menu-section");
           if (!firstSection) return;
@@ -3128,13 +3369,15 @@
           var activeNav =
             activePanel === "food"
               ? navFood
-              : activePanel === "bar"
-                ? navBar
-                : activePanel === "drinks"
-                  ? navDrinks
-                  : activePanel === "ethiopian"
-                    ? navEthiopian
-                    : navDesserts;
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
           var navH = activeNav.getBoundingClientRect().height;
           var totalH = headerH + tabsH + navH;
 
@@ -3157,25 +3400,29 @@
           var activeNav =
             activePanel === "food"
               ? navFood
-              : activePanel === "bar"
-                ? navBar
-                : activePanel === "drinks"
-                  ? navDrinks
-                  : activePanel === "ethiopian"
-                    ? navEthiopian
-                    : navDesserts;
+              : activePanel === "brunch"
+                ? navBrunch
+                : activePanel === "bar"
+                  ? navBar
+                  : activePanel === "drinks"
+                    ? navDrinks
+                    : activePanel === "ethiopian"
+                      ? navEthiopian
+                      : navDesserts;
           var links = Array.from(activeNav.querySelectorAll("a"));
           var sections = Array.from(
             document.querySelectorAll(
               activePanel === "food"
                 ? "#panel-food .menu-section"
-                : activePanel === "bar"
-                  ? "#panel-bar .menu-section"
-                  : activePanel === "drinks"
-                    ? "#panel-drinks .menu-section"
-                    : activePanel === "ethiopian"
-                      ? "#panel-ethiopian .menu-section"
-                      : "#panel-desserts .menu-section",
+                : activePanel === "brunch"
+                  ? "#panel-brunch .menu-section"
+                  : activePanel === "bar"
+                    ? "#panel-bar .menu-section"
+                    : activePanel === "drinks"
+                      ? "#panel-drinks .menu-section"
+                      : activePanel === "ethiopian"
+                        ? "#panel-ethiopian .menu-section"
+                        : "#panel-desserts .menu-section",
             ),
           );
 
