@@ -1126,13 +1126,13 @@ body.nav-active {
 }
 
 .service .grid-list li:nth-child(2n + 1) .service-card {
-  background-color: var(--forest-green);
-  border-color: var(--forest-green);
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .service .grid-list li:nth-child(2n) .service-card {
-  background-color: var(--orange);
-  border-color: var(--orange);
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .service .service-card .card-title a,
@@ -1529,34 +1529,29 @@ textarea.input-field {
   );
   color: var(--smoky-black-1);
   border: 2px solid transparent;
+  opacity: 0.9;
 }
 
 .feature-item:nth-child(2n + 1) .feature-card {
   border-color: var(--forest-green);
-  background-image: linear-gradient(
-    180deg,
-    var(--white) 0%,
-    hsla(140, 93%, 21%, 0.15) 100%
-  );
+  background-color: var(--forest-green);
+  background-image: none;
 }
 
 .feature-item:nth-child(2n + 1) .feature-card .card-title,
 .feature-item:nth-child(2n + 1) .feature-card .card-text {
-  color: var(--forest-green);
+  color: var(--white);
 }
 
 .feature-item:nth-child(2n) .feature-card {
   border-color: var(--orange);
-  background-image: linear-gradient(
-    180deg,
-    var(--white) 0%,
-    hsla(29, 100%, 55%, 0.15) 100%
-  );
+  background-color: var(--orange);
+  background-image: none;
 }
 
 .feature-item:nth-child(2n) .feature-card .card-title,
 .feature-item:nth-child(2n) .feature-card .card-text {
-  color: var(--orange);
+  color: var(--white);
 }
 
 .feature-card .card-icon {
